@@ -1,15 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
   try {
     const token = request.cookies.get("token");
+    const nextauthtoken = await getToken({
+      req: request,
+      secret: process.env.JSONWEBTOKEN as string,
+    });
+
+    console.log("Custom token:", token);
+    console.log("NextAuth JWT Token:", nextauthtoken);
+
     const path = request.nextUrl.pathname;
 
-    if (token && path === "/login") {
+    if ((token || nextauthtoken) && (path === "/login" || path === "/signup")) {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (!token && path !== "/login") {
+    if (!token && !nextauthtoken && path !== "/login" && path !== "/signup") {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
@@ -21,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/login"],
+  matcher: ["/", "/login", "/signup"],
 };

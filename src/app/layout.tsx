@@ -1,5 +1,8 @@
+"use client";
+
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import NextAuthProvider from "@/components/NextAuthProvider";
 
 export default function RootLayout({
   children,
@@ -9,7 +12,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <NextAuthProvider>{children}</NextAuthProvider>
         <Toaster />
       </body>
     </html>

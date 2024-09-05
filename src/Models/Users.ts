@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 interface UserType extends Document {
   name: string;
   email: string;
-  password: string;
+  password: string | null;
 }
 
 const UserSchema = new Schema<UserType>({
@@ -18,7 +18,6 @@ const UserSchema = new Schema<UserType>({
   },
   password: {
     type: String,
-    required: true,
   },
 });
 

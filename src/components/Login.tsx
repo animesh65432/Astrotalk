@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { useLoginUser } from "../hooks";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const LoginPage: React.FC = () => {
   const form = useForm<LoginTypes>({
@@ -83,8 +84,10 @@ const LoginPage: React.FC = () => {
           />
 
           <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
+
+          <Button onClick={() => signIn("google")}>log with google</Button>
         </form>
-        <Link href="/singup">Don't have an account yet ?</Link>
+        <Link href="/signup">Don't have an account yet ?</Link>
       </Form>
     </div>
   );

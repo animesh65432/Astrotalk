@@ -18,6 +18,7 @@ import { SingupTypes } from "../types";
 import { useCreateUser } from "../hooks";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 const SingupPage: React.FC = () => {
   const form = useForm<SingupTypes>({
     resolver: zodResolver(SingupSchema),
@@ -110,6 +111,7 @@ const SingupPage: React.FC = () => {
           />
 
           <Button type="submit">{loading ? "Loading ..." : "Singup"}</Button>
+          <Button onClick={() => signIn("google")}>login with google</Button>
         </form>
         <Link href="/login">Have an account ? Login</Link>
       </Form>
