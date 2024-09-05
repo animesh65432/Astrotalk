@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  env: {
+    DATABASEURL: process.env.DATABASEURL,
+  },
+};
 
 export default nextConfig;
