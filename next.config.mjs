@@ -6,6 +6,10 @@ const nextConfig = {
     BACKENDURL: process.env.BACKENDURL,
     GOOGLECLIENTID: process.env.GOOGLECLIENTID,
     GOOGLECLIENTSECRECT: process.env.GOOGLECLIENTSECRECT,
+    REPLICATE_API_TOKEN: process.env.REPLICATE_API_TOKEN,
+  },
+  images: {
+    domains: ["storage.googleapis.com"],
   },
 };
 
