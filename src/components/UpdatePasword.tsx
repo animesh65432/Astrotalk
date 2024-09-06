@@ -17,16 +17,17 @@ import { Button } from "./ui/button";
 import { UpdatePasswordTypes } from "../types";
 import { useUpdatePassword } from "../hooks";
 import { useToast } from "@/hooks/use-toast";
+
 type Props = {
   id: string;
 };
+
 const UpdatePasword: React.FC<Props> = ({ id }) => {
   const form = useForm<UpdatePasswordTypes>({
     resolver: zodResolver(UpdatePasswordSchema),
   });
   const [isLoading, errormessage, UpdatePassword] = useUpdatePassword();
   const { toast } = useToast();
-  console.log(errormessage);
 
   const onSubmit = async (data: UpdatePasswordTypes) => {
     try {
@@ -46,47 +47,73 @@ const UpdatePasword: React.FC<Props> = ({ id }) => {
     } catch (error) {
       toast({
         title: "Something Went Wrong",
-        description: "Plase try again later",
+        description: "Please try again later",
       });
     }
   };
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Password" {...field} />
-                </FormControl>
-                <FormDescription>Please enter your password</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmpassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Confirm Password" {...field} />
-                </FormControl>
-                <FormDescription>Please confirm your password</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300 p-6">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 md:p-8 lg:p-10 space-y-6">
+        <h1 className="text-2xl font-semibold text-center text-gray-800">
+          Update Password
+        </h1>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 w-full"
+                      placeholder="Password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-gray-500">
+                    Please enter your new password
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmpassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500 w-full"
+                      placeholder="Confirm Password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-gray-500">
+                    Please confirm your password
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <Button type="submit">{isLoading ? "Laoding..." : "Update"}</Button>
-        </form>
-      </Form>
+            <Button
+              className={`w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md ${
+                isLoading ? "cursor-not-allowed opacity-50" : ""
+              }`}
+              type="submit"
+            >
+              {isLoading ? "Loading..." : "Update"}
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

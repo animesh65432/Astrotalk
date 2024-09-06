@@ -19,6 +19,7 @@ import { useCreateUser } from "../hooks";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+
 const SingupPage: React.FC = () => {
   const form = useForm<SingupTypes>({
     resolver: zodResolver(SingupSchema),
@@ -42,79 +43,122 @@ const SingupPage: React.FC = () => {
       }
     } catch (error) {
       toast({
-        title: "Eroor Something Went Wrong",
+        title: "Error Something Went Wrong",
         description: "Please try again later",
       });
     }
   };
-  return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="username" {...field} />
-                </FormControl>
-                <FormDescription>Plase enter your Username</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="email" {...field} />
-                </FormControl>
-                <FormDescription>Plase enter your email</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input placeholder="password" {...field} />
-                </FormControl>
-                <FormDescription>Plase enter your password</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmpassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>ConfirmPassword</FormLabel>
-                <FormControl>
-                  <Input placeholder="Confirmpassword" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Plase enter your Confirmpassword
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <Button type="submit">{loading ? "Loading ..." : "Singup"}</Button>
-          <Button onClick={() => signIn("google")}>login with google</Button>
-        </form>
-        <Link href="/login">Have an account ? Login</Link>
-      </Form>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 space-y-6 md:p-8 lg:p-10">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      placeholder="Username"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-gray-500">
+                    Please enter your Username
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      placeholder="Email"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-gray-500">
+                    Please enter your email
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      placeholder="Password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-gray-500">
+                    Please enter your password
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmpassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      placeholder="Confirm password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription className="text-sm text-gray-500">
+                    Please enter your Confirm Password
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button
+              className={`w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md ${
+                loading ? "cursor-not-allowed opacity-50" : ""
+              }`}
+              type="submit"
+            >
+              {loading ? "Loading..." : "Sign up"}
+            </Button>
+          </form>
+          <Button
+            className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md"
+            onClick={() => signIn("google")}
+          >
+            Login with Google
+          </Button>
+          <Link
+            href="/login"
+            className="block text-center text-blue-500 hover:underline mt-4"
+          >
+            Have an account? Login
+          </Link>
+        </Form>
+      </div>
     </div>
   );
 };

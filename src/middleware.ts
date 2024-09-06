@@ -3,7 +3,8 @@ import { getToken } from "next-auth/jwt";
 
 export async function middleware(request: NextRequest) {
   try {
-    const token = request.cookies.get("token");
+    const token = request.cookies.get("token")?.value;
+    console.log("The token", token);
     const nextauthtoken = await getToken({
       req: request,
       secret: process.env.JSONWEBTOKEN as string,

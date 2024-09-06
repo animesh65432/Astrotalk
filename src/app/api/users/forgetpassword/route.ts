@@ -37,7 +37,7 @@ export const POST = async (request: NextRequest) => {
       to: email,
       subject: "Password Reset Request",
       html: `<a href='http://localhost:3000
-/updatepassword/${newforgetpassword._id}'>Click here to reset your password</a>`,
+/UpdatePassword/${newforgetpassword._id}'>Click here to reset your password</a>`,
     });
 
     return NextResponse.json(
