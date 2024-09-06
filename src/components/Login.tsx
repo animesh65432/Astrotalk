@@ -88,6 +88,7 @@ const LoginPage: React.FC = () => {
           <Button onClick={() => signIn("google")}>log with google</Button>
         </form>
         <Link href="/signup">Don't have an account yet ?</Link>
+        <Link href="/ResetPassword">forget your password</Link>
       </Form>
     </div>
   );
