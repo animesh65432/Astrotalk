@@ -36,7 +36,7 @@ export const POST = async (request: NextRequest) => {
       from: process.env.NODEMAILERUSER as string,
       to: email,
       subject: "Password Reset Request",
-      html: `<a href='http://localhost:3000
+      html: `<a href='https://astrotalk-ten.vercel.app
 /UpdatePassword/${newforgetpassword._id}'>Click here to reset your password</a>`,
     });
 

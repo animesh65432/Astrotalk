@@ -14,7 +14,10 @@ const useResetPassWord = (): useResetPassWordreturntypes => {
   const ResetPassword = async (data: ResetPasswordTypes): Promise<boolean> => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:3000/api/users/forgetpassword`, data);
+      await axios.post(
+        `https://astrotalk-ten.vercel.app/api/users/forgetpassword`,
+        data
+      );
       return true;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

@@ -13,7 +13,10 @@ const useCreateUser = (): useCreateUserrteturntypes => {
   const CreateUser = async (data: SingupTypes): Promise<boolean> => {
     setloading(true);
     try {
-      await axios.post(`${process.env.BACKENDURL}/api/users/create`, data);
+      await axios.post(
+        `https://astrotalk-ten.vercel.app/api/users/create`,
+        data
+      );
 
       return true;
     } catch (error: unknown) {

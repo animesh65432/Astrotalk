@@ -20,7 +20,10 @@ const useUpdatePassword = (): useUpdatePasswordreturntypes => {
   ): Promise<boolean> => {
     setLoading(true);
     try {
-      await axios.put("http://localhost:3000/api/users/updatepassword", data);
+      await axios.put(
+        "https://astrotalk-ten.vercel.app/api/users/updatepassword",
+        data
+      );
       return true;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

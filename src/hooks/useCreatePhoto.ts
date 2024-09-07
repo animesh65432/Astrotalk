@@ -19,7 +19,7 @@ const useCreatePost = (): useCreatePostreturntypes => {
     setloading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/images/create",
+        "https://astrotalk-ten.vercel.app/api/images/create",
         data
       );
 

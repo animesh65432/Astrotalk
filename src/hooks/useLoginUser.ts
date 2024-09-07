@@ -15,7 +15,10 @@ const useLoginUser = (): uselLoginUserreturntypes => {
   const logintheuser = async (data: LoginTypes): Promise<boolean> => {
     setloading(true);
     try {
-      await axios.post(`${process.env.BACKENDURL}/api/users/login`, data);
+      await axios.post(
+        `https://astrotalk-ten.vercel.app/api/users/login`,
+        data
+      );
       return true;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
