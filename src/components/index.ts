@@ -6,6 +6,7 @@ import Input from "./Input";
 import Home from "./Home";
 import GenarativeImages from "./GenarativeImages";
 import ShadowImages from "./ShadowImages";
+import Navbar from "./Navbar";
 
 export {
   SingupPage,
@@ -16,4 +17,5 @@ export {
   Home,
   GenarativeImages,
   ShadowImages,
+  Navbar,
 };
