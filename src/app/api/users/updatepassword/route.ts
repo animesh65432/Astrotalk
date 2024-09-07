@@ -35,11 +35,18 @@ export const PUT = async (request: NextRequest) => {
       },
     });
   } catch (error) {
-    console.log("Updtae Password errors ", error);
+    let errorMessage = "An error occurred";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (error instanceof Response) {
+      const errorText = await error.text();
+      errorMessage = `API error: ${errorText}`;
+    }
     return NextResponse.json({
       message: {
         sucess: false,
-        message: "internal server errors",
+        message: errorMessage,
       },
     });
   }

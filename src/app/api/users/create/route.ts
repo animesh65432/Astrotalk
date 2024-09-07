@@ -35,9 +35,17 @@ export const POST = async (request: NextRequest) => {
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error during user registration:", error);
+    let errorMessage = "An error occurred";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (error instanceof Response) {
+      const errorText = await error.text();
+      errorMessage = `API error: ${errorText}`;
+    }
+
     return NextResponse.json(
-      { success: false, message: "An error occurred during registration" },
+      { success: false, message: errorMessage },
       { status: 500 }
     );
   }

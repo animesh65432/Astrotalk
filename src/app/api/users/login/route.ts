@@ -67,11 +67,18 @@ export const POST = async (request: NextRequest) => {
 
     return response;
   } catch (error) {
-    console.log("Error during user login", error);
+    let errorMessage = "An error occurred";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (error instanceof Response) {
+      const errorText = await error.text();
+      errorMessage = `API error: ${errorText}`;
+    }
     return NextResponse.json(
       {
         sucess: false,
-        message: "an error occurred during login",
+        message: errorMessage,
       },
       { status: 500 }
     );

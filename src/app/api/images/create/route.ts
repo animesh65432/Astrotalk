@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
@@ -36,12 +37,15 @@ export const POST = async (request: NextRequest) => {
       },
       { status: 201 }
     );
-  } catch (error: any) {
-    console.error("Detailed error:", error);
+  } catch (error) {
+    let errorMessage = "An error occurred";
 
-    const errorMessage = error.response
-      ? error.response.data.error.message
-      : error.message || "An error occurred";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (error instanceof Response) {
+      const errorText = await error.text();
+      errorMessage = `API error: ${errorText}`;
+    }
 
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }

@@ -1,7 +1,7 @@
 "use server";
 import { connect } from "mongoose";
 
-let dbconnection = {
+const dbconnection = {
   connected: false,
 };
 async function dbconnect(): Promise<void> {
