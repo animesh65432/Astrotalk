@@ -30,7 +30,7 @@ const LoginPage: React.FC = () => {
   const { toast } = useToast();
   const onSubmit = async (data: LoginTypes) => {
     try {
-      let result: boolean = await logintheuser(data);
+      const result: boolean = await logintheuser(data);
 
       if (result) {
         toast({
@@ -120,7 +120,7 @@ const LoginPage: React.FC = () => {
               href="/signup"
               className="block text-blue-500 hover:underline"
             >
-              Don't have an account yet?
+              Don&apos;t have an account yet?
             </Link>
             <Link
               href="/ResetPassword"

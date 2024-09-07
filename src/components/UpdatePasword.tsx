@@ -31,7 +31,7 @@ const UpdatePasword: React.FC<Props> = ({ id }) => {
 
   const onSubmit = async (data: UpdatePasswordTypes) => {
     try {
-      let result = await UpdatePassword({ id, password: data.password });
+      const result = await UpdatePassword({ id, password: data.password });
 
       if (result) {
         toast({

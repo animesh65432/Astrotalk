@@ -18,13 +18,12 @@ const useCreatePost = (): useCreatePostreturntypes => {
   const createpost = async (data: createpostpayload): Promise<boolean> => {
     setloading(true);
     try {
-      let response = await axios.post(
+      const response = await axios.post(
         "http://localhost:3000/api/images/create",
         data
       );
 
-      let url = response?.data?.imageUrl;
-      console.log(url);
+      const url = response?.data?.imageUrl;
       setphotourl(url);
       return true;
     } catch (error: unknown) {

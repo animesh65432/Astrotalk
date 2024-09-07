@@ -27,7 +27,7 @@ const ResetPassword: React.FC = () => {
 
   const onSubmit = async (data: ResetPasswordTypes) => {
     try {
-      let result: boolean = await ResetPassword(data);
+      const result: boolean = await ResetPassword(data);
 
       if (result) {
         toast({

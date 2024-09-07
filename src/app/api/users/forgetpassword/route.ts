@@ -8,7 +8,7 @@ export const POST = async (request: NextRequest) => {
   try {
     const { email } = await request.json();
 
-    let CheckTheExsitinUser = await User.find({ email });
+    const CheckTheExsitinUser = await User.find({ email });
 
     if (CheckTheExsitinUser.length === 0) {
       return NextResponse.json(
@@ -19,7 +19,7 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
-    let newforgetpassword = await ForGetPassWord.create({
+    const newforgetpassword = await ForGetPassWord.create({
       active: true,
       user: CheckTheExsitinUser[0]._id,
     });
