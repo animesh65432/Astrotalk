@@ -14,7 +14,7 @@ const Input: React.FC = () => {
 
   const GenRatePhoto = async () => {
     try {
-      let result = await createpost({ inputtext });
+      const result = await createpost({ inputtext });
       if (result) {
         toast({
           title: "Successfully Uploaded",

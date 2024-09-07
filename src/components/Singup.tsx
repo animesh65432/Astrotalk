@@ -19,14 +19,13 @@ import { useCreateUser } from "../hooks";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-
 const SingupPage: React.FC = () => {
   const form = useForm<SingupTypes>({
     resolver: zodResolver(SingupSchema),
   });
   const [loading, CreateUser, errormessage] = useCreateUser();
   const { toast } = useToast();
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: SingupTypes) => {
     try {
       const result: boolean = await CreateUser(data);
 
