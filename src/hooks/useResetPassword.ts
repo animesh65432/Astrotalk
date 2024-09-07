@@ -16,7 +16,7 @@ const useResetPassWord = (): useResetPassWordreturntypes => {
     try {
       await axios.post(`http://localhost:3000/api/users/forgetpassword`, data);
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         seterrormessage(
           error?.response?.data?.message?.message ||
