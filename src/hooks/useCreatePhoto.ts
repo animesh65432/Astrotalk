@@ -27,9 +27,14 @@ const useCreatePost = (): useCreatePostreturntypes => {
       console.log(url);
       setphotourl(url);
       return true;
-    } catch (error: any) {
-      console.log(error);
-      seterrormessage(error.response.data.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        seterrormessage(
+          error.response?.data.message || "An unknown error occurred."
+        );
+      } else {
+        seterrormessage("An unexpected error occurred.");
+      }
       return false;
     } finally {
       setloading(false);

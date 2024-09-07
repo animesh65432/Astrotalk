@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
-    let CheckExsitingUser = await User.findOne({ email });
+    const CheckExsitingUser = await User.findOne({ email });
 
     if (!CheckExsitingUser) {
       return NextResponse.json(
@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
-    let checkpassword = await bcrypt.compare(
+    const checkpassword = await bcrypt.compare(
       password,
       CheckExsitingUser.password
     );
@@ -45,7 +45,7 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
-    let response = NextResponse.json(
+    const response = NextResponse.json(
       {
         sucess: true,
         message: "user login sucessfully",
@@ -53,7 +53,7 @@ export const POST = async (request: NextRequest) => {
       { status: 200 }
     );
 
-    let token = jsonwebtoken.sign(
+    const token = jsonwebtoken.sign(
       {
         id: CheckExsitingUser._id,
         email: CheckExsitingUser.email,

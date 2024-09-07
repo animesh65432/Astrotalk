@@ -22,10 +22,15 @@ const useUpdatePassword = (): useUpdatePasswordreturntypes => {
     try {
       await axios.put("http://localhost:3000/api/users/updatepassword", data);
       return true;
-    } catch (error: any) {
-      seterrormessage(
-        error?.response?.data?.message?.message || "Internal server errors"
-      );
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        seterrormessage(
+          error?.response?.data?.message?.message ||
+            "An unknown error occurred."
+        );
+      } else {
+        seterrormessage("An unexpected error occurred.");
+      }
       return false;
     } finally {
       setLoading(false);

@@ -17,8 +17,14 @@ const useLoginUser = (): uselLoginUserreturntypes => {
     try {
       await axios.post(`${process.env.BACKENDURL}/api/users/login`, data);
       return true;
-    } catch (error: any) {
-      seterrormessage(error.response.data.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        seterrormessage(
+          error.response?.data.message || "An unknown error occurred."
+        );
+      } else {
+        seterrormessage("An unexpected error occurred.");
+      }
       return false;
     } finally {
       setloading(false);

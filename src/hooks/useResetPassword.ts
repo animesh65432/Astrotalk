@@ -17,9 +17,14 @@ const useResetPassWord = (): useResetPassWordreturntypes => {
       await axios.post(`http://localhost:3000/api/users/forgetpassword`, data);
       return true;
     } catch (error: any) {
-      seterrormessage(
-        error?.response?.data?.message?.message || "Internal server errors"
-      );
+      if (axios.isAxiosError(error)) {
+        seterrormessage(
+          error?.response?.data?.message?.message ||
+            "An unknown error occurred."
+        );
+      } else {
+        seterrormessage("An unexpected error occurred.");
+      }
       return false;
     } finally {
       setLoading(false);

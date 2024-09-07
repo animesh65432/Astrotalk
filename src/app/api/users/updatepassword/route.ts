@@ -8,7 +8,7 @@ export const PUT = async (request: NextRequest) => {
   try {
     const { id, password } = await request.json();
 
-    let findforgetpassword = await ForGetPassWord.findById(id);
+    const findforgetpassword = await ForGetPassWord.findById(id);
 
     if (!findforgetpassword || !findforgetpassword.active) {
       return NextResponse.json(
@@ -21,8 +21,8 @@ export const PUT = async (request: NextRequest) => {
         { status: 400 }
       );
     }
-    let hashpassword = await bycrpt.hash(password, 10);
-    let user = await User.findById(findforgetpassword.user);
+    const hashpassword = await bycrpt.hash(password, 10);
+    const user = await User.findById(findforgetpassword.user);
 
     await user.updateOne({ password: hashpassword });
 
