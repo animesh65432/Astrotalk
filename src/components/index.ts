@@ -5,6 +5,7 @@ import UpdatePasword from "./UpdatePasword";
 import Input from "./Input";
 import Home from "./Home";
 import GenarativeImages from "./GenarativeImages";
+import ShadowImages from "./ShadowImages";
 
 export {
   SingupPage,
@@ -14,4 +15,5 @@ export {
   Input,
   Home,
   GenarativeImages,
+  ShadowImages,
 };

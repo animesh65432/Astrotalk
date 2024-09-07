@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { useCreatePhoto } from "../hooks";
 import { useToast } from "@/hooks/use-toast";
-import { GenarativeImages } from "@/components";
 import { Input as ShadInput } from "./ui/input";
 import { Button } from "./ui/button";
+import { GenarativeImages, ShadowImages } from "@/components";
 const Input: React.FC = () => {
   const [inputtext, setinputtext] = useState<string>("");
   const [islodaing, createpost, errormessage, photourl] = useCreatePhoto();
@@ -53,6 +53,8 @@ const Input: React.FC = () => {
       </div>
 
       {!islodaing && upload && <GenarativeImages photourl={photourl} />}
+
+      {islodaing && <ShadowImages />}
     </div>
   );
 };

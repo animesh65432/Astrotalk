@@ -7,9 +7,9 @@ const nextConfig = {
     GOOGLECLIENTID: process.env.GOOGLECLIENTID,
     GOOGLECLIENTSECRECT: process.env.GOOGLECLIENTSECRECT,
     REPLICATE_API_TOKEN: process.env.REPLICATE_API_TOKEN,
-  },
-  images: {
-    domains: ["storage.googleapis.com"],
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    IMAGES_MODEL: process.env.IMAGES_MODEL,
+    IMAGES_MODEL_SECRECT: process.env.IMAGES_MODEL_SECRECT,
   },
 };
 

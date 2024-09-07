@@ -23,7 +23,8 @@ const useCreatePost = (): useCreatePostreturntypes => {
         data
       );
 
-      let url = response?.data?.data?.data?.url;
+      let url = response?.data?.imageUrl;
+      console.log(url);
       setphotourl(url);
       return true;
     } catch (error: any) {

@@ -1,48 +1,48 @@
 import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
+
 export const POST = async (request: NextRequest) => {
   try {
     const { inputtext } = await request.json();
-    console.log(inputtext);
+    console.log("Input text:", inputtext);
 
     if (!inputtext) {
       return NextResponse.json(
-        {
-          data: {
-            message: "please type something",
-          },
-        },
+        { error: "Please type something" },
         { status: 400 }
       );
     }
 
-    const response = await axios.post(
-      "https://ai-text-to-image-generator-api.p.rapidapi.com/realistic",
-      {
-        inputs: inputtext,
+    const response = await fetch(process.env.IMAGES_MODEL as string, {
+      headers: {
+        Authorization: `Bearer hf_${process.env.IMAGES_MODEL_SECRECT}`,
+        "Content-Type": "application/json",
       },
-      {
-        headers: {
-          "x-rapidapi-key":
-            "b40c346f60msh421fe6afa0cf5f5p147d9djsn287645bbc55d",
-          "x-rapidapi-host": "ai-text-to-image-generator-api.p.rapidapi.com",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(response);
+      method: "POST",
+      body: JSON.stringify({ inputs: inputtext }),
+    });
+    if (!response.ok) {
+      throw new Error(`API response error: ${response.statusText}`);
+    }
+
+    const result = await response.arrayBuffer();
+    const base64Image = `data:image/jpeg;base64,${Buffer.from(result).toString(
+      "base64"
+    )}`;
 
     return NextResponse.json(
       {
-        data: {
-          message: "Sucessfully create it",
-          data: response?.data,
-        },
+        message: "Successfully created",
+        imageUrl: base64Image,
       },
       { status: 201 }
     );
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
+  } catch (error: any) {
+    console.error("Detailed error:", error);
+
+    const errorMessage = error.response
+      ? error.response.data.error.message
+      : error.message || "An error occurred";
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 };
