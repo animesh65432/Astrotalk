@@ -28,7 +28,7 @@ const SingupPage: React.FC = () => {
   const { toast } = useToast();
   const onSubmit = async (data: any) => {
     try {
-      let result: boolean = await CreateUser(data);
+      const result: boolean = await CreateUser(data);
 
       if (result) {
         toast({
