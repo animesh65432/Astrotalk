@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (request: NextRequest) => {
   try {
     const { inputtext } = await request.json();
-    console.log("Input text:", inputtext);
+    console.log("Input text:1", inputtext, "it's the backend");
 
     if (!inputtext) {
       return NextResponse.json(
