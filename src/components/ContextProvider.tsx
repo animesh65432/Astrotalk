@@ -6,7 +6,8 @@ type Props = {
 };
 const ContextProvider: React.FC<Props> = ({ children }) => {
   const [color, setcolor] = useState<boolean>(false);
-  console.log(color)
+  console.log(color, setcolor)
+
 
   const ontoggole = () => {
     setcolor((prev) => !prev);
